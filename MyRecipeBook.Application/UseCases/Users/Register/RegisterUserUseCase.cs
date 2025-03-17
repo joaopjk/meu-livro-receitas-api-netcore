@@ -1,15 +1,30 @@
-﻿using MyRecipeBook.Comunication.Requests;
+﻿using AutoMapper;
+using MyRecipeBook.Application.Services.Cryptography;
+using MyRecipeBook.Comunication.Requests;
 using MyRecipeBook.Comunication.Responses;
+using MyRecipeBook.Domain.Entities;
+using MyRecipeBook.Domain.Repositories.Users;
 using MyRecipeBook.Exceptions;
-using MyRecipeBook.Exceptions.ExceptionsBase;
 
 namespace MyRecipeBook.Application.UseCases.Users.Register
 {
-    public class RegisterUserUseCase
+    public class RegisterUserUseCase(
+        IUserWriteOnlyRepository userWriteOnlyRepository,
+        IUserReadOnlyRepository userReadOnlyRepository,
+        IMapper mapper) : IRegisterUserUseCase
     {
-        public ResponseRegisteredUserJson Execute(RequestRegisterUserJson request)
+        private readonly IUserWriteOnlyRepository _userWriteOnlyRepository = userWriteOnlyRepository;
+        private readonly IUserReadOnlyRepository _userReadOnlyRepository = userReadOnlyRepository;
+        private readonly IMapper _mapper = mapper;
+
+        public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)
         {
             Validate(request);
+
+            var user = _mapper.Map<User>(request);
+            user.Password = PasswordEncripter.Encrypt(request.Password);
+
+            await _userWriteOnlyRepository.Add(user);
 
             return new ResponseRegisteredUserJson
             {

@@ -11,7 +11,7 @@ namespace MyRecipeBook.Api.Filters
     {
         public void OnException(ExceptionContext context)
         {
-            if (context.Exception is MyRecipeBookException exception)
+            if (context.Exception is MyRecipeBookException)
                 HandleProjectException(context);
             else
                 ThrowUnknowException(context);

@@ -1,6 +1,8 @@
 
 using MyRecipeBook.Api.Filters;
 using MyRecipeBook.Api.Middleware;
+using MyRecipeBook.Application;
+using MyRecipeBook.Infrastructure;
 
 namespace MyRecipeBook.Api
 {
@@ -14,6 +16,8 @@ namespace MyRecipeBook.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddMvc(opt => opt.Filters.Add(typeof(ExceptionFilter)));
+            builder.Services.AddInfrastructure();
+            builder.Services.AddApplication();
 
             var app = builder.Build();
 
