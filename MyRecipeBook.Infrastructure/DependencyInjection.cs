@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using MyRecipeBook.Domain.Repositories;
 using MyRecipeBook.Domain.Repositories.Users;
 using MyRecipeBook.Infrastructure.DataAccess;
 using MyRecipeBook.Infrastructure.DataAccess.Repositories;
@@ -33,6 +34,7 @@ namespace MyRecipeBook.Infrastructure
         {
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
             services.AddScoped<IUserReadOnlyRepository, UserRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }
 }
