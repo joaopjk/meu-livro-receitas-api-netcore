@@ -19,14 +19,7 @@ namespace MyRecipeBook.Infrastructure
         {
             services.AddDbContext<MyRecipeBookDbContext>(options =>
             {
-                options.UseSqlServer(
-                    "Data Source=localhost;" +
-                    "Initial Catalog=meulivroreceitas;" +
-                    "User ID=sa;" +
-                    "Password=Root@123root;" +
-                    //"Trusted_Connection=True;" +
-                    "Encrypt=True;" +
-                    "TrustServerCertificate=True;");
+                options.UseSqlServer(Environment.GetEnvironmentVariable("CONNECTION_STRING")!);
             });
         }
 

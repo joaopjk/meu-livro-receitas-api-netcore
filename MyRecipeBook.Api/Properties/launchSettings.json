@@ -26,7 +26,8 @@
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7058;http://localhost:5226",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CONNECTION_STRING": "Data Source=localhost;Initial Catalog=meulivroreceitas;User ID=sa;Password=Root@123root;Encrypt=True;TrustServerCertificate=True;"
       }
     },
     "IIS Express": {

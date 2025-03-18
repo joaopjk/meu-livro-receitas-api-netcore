@@ -3,6 +3,7 @@ using MyRecipeBook.Api.Filters;
 using MyRecipeBook.Api.Middleware;
 using MyRecipeBook.Application;
 using MyRecipeBook.Infrastructure;
+using MyRecipeBook.Infrastructure.Migrations;
 
 namespace MyRecipeBook.Api
 {
@@ -31,6 +32,7 @@ namespace MyRecipeBook.Api
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();
+            DataBaseMigration.Migrate(Environment.GetEnvironmentVariable("CONNECTION_STRING")!);
             app.Run();
         }
     }

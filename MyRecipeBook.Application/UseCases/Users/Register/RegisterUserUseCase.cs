@@ -7,7 +7,6 @@ using MyRecipeBook.Domain.Entities;
 using MyRecipeBook.Domain.Repositories;
 using MyRecipeBook.Domain.Repositories.Users;
 using MyRecipeBook.Exceptions;
-using System.Threading.Tasks;
 
 namespace MyRecipeBook.Application.UseCases.Users.Register
 {
