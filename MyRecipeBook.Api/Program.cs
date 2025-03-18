@@ -32,8 +32,14 @@ namespace MyRecipeBook.Api
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();
-            DataBaseMigration.Migrate(Environment.GetEnvironmentVariable("CONNECTION_STRING")!);
+            Migrations(app);
             app.Run();
+        }
+
+        private static void Migrations(WebApplication app)
+        {
+            var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
+            DataBaseMigration.Migrate(Environment.GetEnvironmentVariable("CONNECTION_STRING")!, serviceScope.ServiceProvider);
         }
     }
 }
